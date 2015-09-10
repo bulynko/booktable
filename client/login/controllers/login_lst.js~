@@ -1,0 +1,13 @@
+angular.module("table").controller("LocationsListCtrl", ['$scope', '$meteor', '$rootScope', '$state',
+  function($scope, $meteor, $rootScope, $state){
+ 
+    console.log(" Login-Controller..... ");
+
+    $scope.users = $meteor.collection(Meteor.users, false).subscribe('users');
+
+
+}
+
+]);
+
+

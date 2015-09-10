@@ -1,0 +1,10 @@
+
+//Meteor.publish("locations", function (options, searchString) {
+Meteor.publish("locations", function () {
+
+console.log("SERVER:  from subscribe locations .....")
+
+return Locations.find({});
+//return ['A1','A2','B1'];
+
+});

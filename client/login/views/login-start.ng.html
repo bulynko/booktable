@@ -1,0 +1,21 @@
+<div layout="column" style="padding: 20%">
+<form>
+
+    <md-input-container style="padding: 20px" >
+      <label>login email</label>
+      <input ng-model="myuser.email"  type="email">
+    </md-input-container>
+    <md-input-container  style="padding: 20px">
+      <label>password</label>
+      <input ng-model="myuser.password" type="password">
+    </md-input-container>
+
+    <font color="red">{{ loginErrorMessage }} </font>
+    
+    <md-input-container  style="padding: 20px">
+      <md-button class="md-raised md-primary"  ng-click="userLoginButton(myuser)" 
+       align="center"> LOGIN </md-button> 
+    </md-input-container>
+    
+</form>  
+</div>
