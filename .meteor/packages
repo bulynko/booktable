@@ -11,9 +11,9 @@ accounts-password
 accounts-ui
 angularutils:pagination
 tmeasday:publish-counts
-angular:angular-material
 less
 momentjs:moment
 angular:angular-animate
 angular:angular-aria
 planettraining:material-design-icons
+angular:angular-material

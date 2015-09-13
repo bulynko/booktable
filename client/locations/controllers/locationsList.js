@@ -3,19 +3,19 @@ angular.module("table").controller("LocationsListCtrl", ['$scope', '$meteor', '$
  
     console.log(" Controller for list 1 ..... ");
 
-    $scope.timeMeeting="30min";
+    $scope.timeMeeting="60min";
     $scope.startTimeMeeting="10:00";
-    $scope.placeMeeting="DUBAI-HO"
+    $scope.placeMeeting="GBM-HO"
     
     $scope.users = $meteor.collection(Meteor.users, false).subscribe('users');
     $scope.locations = $meteor.collection(Locations).subscribe('locations');
- 
-    
-  //  $scope.selected_timeMeeting = $state.timeMeeting;
-  // $scope.appData=appData;
+    $scope.rooms = $meteor.collection(Rooms).subscribe('rooms');
+    $scope.meetings = $meteor.collection(Meetings).subscribe('meetings');
 
 
-  $meteor.autorun($scope, function() {
+    $rootScope.reservationInprogress=false;
+
+    $meteor.autorun($scope, function() {
 
      $rootScope.selected_timeMeeting=$scope.getReactively('timeMeeting');  
      
@@ -26,9 +26,19 @@ angular.module("table").controller("LocationsListCtrl", ['$scope', '$meteor', '$
                        '16:00','16:30','17:00','17:30','18:00','18:30','19:00','19:30' ];
 
 
+  $scope.confirmMeetingButton = function(loc, t) {
 
+     Meteor.call("reserveMeeting",loc, t);  
+     console.log(" Registering a meeting ..... ");
+  
+  };
 
-    console.log(" Controller for list 2 ..... ");
+  $scope.removeMeetingButton = function(id) {
+
+     Meteor.call("cancelMeeting",id);  
+     console.log(" Cancel a meeting ..... "+id);
+  
+  };
 
 }]);
 
@@ -42,12 +52,11 @@ angular.module("table").controller("Locations2ListCtrl", ['$scope', '$meteor', '
   //  $scope.u2="Schedule ......";    
    $rootScope.prebookingMsg="Schedule ......";    
 
- $scope.precheckMeetingButton = function(loc, t) {
+  $scope.precheckMeetingButton = function(loc, t) {
 
   $rootScope.prebookingMsg="Meeting : "+ loc + "  at "+ t + " / "+ $rootScope.selected_timeMeeting;    
   //console.log(" testing ..... ");   
    
-  
   };
 
 }]);

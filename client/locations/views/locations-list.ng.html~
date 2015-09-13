@@ -10,7 +10,7 @@
     
     <md-input-container  layout="row">   
     <a> Start time</a>    
-    <md-select ng-model="startTimeMeeting" style="margin-left: 25% ; margin-right: 20% "  >
+    <md-select ng-model="startTimeMeeting" style="margin-left: 25% ; margin-right: 10% ; "  >
           <md-option ng-repeat="timeSelect in officeTime"  value="{{ timeSelect }}" >  {{ timeSelect }} </md-option>
    </md-select>
    </md-input-container  >  
@@ -18,16 +18,24 @@
     
     <md-input-container layout="row" > 
        <a> Duration</a>   
-    <md-select ng-model="timeMeeting" style="margin-left: 25p% ; margin-right: 20% "  >
+    <md-select ng-model="timeMeeting"  style="margin-left: 25% ; margin-right: 10% ; "  >
           <md-option ng-repeat="duration in ['30min','60min','90min']" value="{{ duration }}" >  {{ duration }} </md-option>
    </md-select>
    </md-input-container>    
    
     
     <md-input-container layout="row" >
-    <a> Location </a>  
-    <md-select ng-model="placeMeeting" style="margin-left: 25p% ; margin-right: 20% "  >
+    <a> Location </a> 
+    <md-select ng-model="placeMeeting" style="margin-left: 25% ; margin-right: 10% "  >
           <md-option ng-repeat="loc in locations" value="{{ loc.name }}" >  {{ loc.name }} </md-option>
+    </md-select>   
+   </md-input-container>
+
+    <md-input-container layout="row" >
+    <a> Room </a> 
+    <md-select ng-model="roomMeeting" style="margin-left: 25% ; margin-right: 10% "  >
+          <md-option ng-repeat="room in rooms" value="{{ room.name }} / {{ room.loc }}" >  
+          {{ room.name }} , size: {{ room.capacity }} , {{ room.attr  }} </md-option>
     </md-select>   
    </md-input-container>
 
@@ -38,25 +46,35 @@
   <div   layout="column" style="padding:20px">
     <h3>   {{ prebookingMsg  }}    </h3>   
      testing : {{ selected_timeMeeting }}   
+
+     <md-button class="md-raised md-primary"   
+     ng-click="confirmMeetingButton(placeMeeting , startTimeMeeting)" >
+       Confirm Reservation</md-button>
+  
   </div>
 
 </div>
 
   
-  <div  ng-controller="Locations2ListCtrl" >
-   <md-button class="md-raised md-primary"   ng-click="precheckMeetingButton(placeMeeting , startTimeMeeting)" >Check Bookings</md-button>
+  <div  ng-controller="Locations2ListCtrl"  >
+   <md-button class="md-raised md-primary"   
+   ng-click="precheckMeetingButton(placeMeeting ,roomMeeting ,startTimeMeeting, timeMeeting )" >Check Bookings</md-button>
    
    </div>
 
-
-
-
-     <ul >
-      userName: {{ u.emails  }}
-      <li ng-repeat=" u in users  ">
-       Users:   {{ u }}
-      </li>
-    </ul>
     
     
+    <div style="padding: 30px">
+   <md-whiteframe ng-repeat="m in meetings " class="md-whiteframe-z3" layout 
+   layout-align="center center"  style="margin: 5px ; padding: 3px;">  
+  
+     <div> {{ m.name }}  {{ m.loc }}  </div>     
+     <div  align="right" >
+       <md-button class="md-raised md-primary"   
+       ng-click="removeMeetingButton(m._id)" >X</md-button>
+
+     </div>
+
+    </md-whiteframe>   
+     </div>
    

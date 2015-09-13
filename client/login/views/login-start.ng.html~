@@ -1,6 +1,9 @@
 <div layout="column" style="padding: 20%">
 <form>
 
+
+ <md-datepicker ng-model="myDate" placeholder="Enter date" disabled></md-datepicker>
+ 
     <md-input-container style="padding: 20px" >
       <label>login email</label>
       <input ng-model="myuser.email"  type="email">
