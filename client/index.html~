@@ -10,17 +10,11 @@
   <md-toolbar  md-scroll-shrink layout="row" layout-align="start center" layout-padding>
 
 
-   <div layout="raw" class="container" ng-if="!currentUser">   
+   <div ng-if="!currentUser" >   
       <meteor-include src="loginButtons"></meteor-include> 
       <md-progress-circular class="md-accent" md-mode="indeterminate"></md-progress-circular>    
    </div>     
-   
-    <md-input-container  layout="row">   
-    <a> Start time</a>    
-    <md-select ng-model="startTimeMeeting" ng-controller="LocationsListCtrl" >
-          <md-option ng-repeat="timeSelect in officeTime"  value="{{ timeSelect }}" >  {{ timeSelect }} </md-option>
-   </md-select>
-   </md-input-container  >     
+    
    
     <div class="container" ng-if="currentUser">   
       <md-button ng-controller="LoginCtrl" class="md-raised md-primary"  ng-click="userLogout()" > 

@@ -10,9 +10,8 @@
   <md-toolbar  md-scroll-shrink layout="row" layout-align="start center" layout-padding>
 
 
-   <div layout="raw" class="container" ng-if="!currentUser">   
+   <div ng-if="!currentUser" >   
       <meteor-include src="loginButtons"></meteor-include> 
-      <md-progress-circular class="md-accent" md-mode="indeterminate"></md-progress-circular>    
    </div>     
     
    
