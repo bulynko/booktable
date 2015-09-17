@@ -1,54 +1,59 @@
 
 
-
-<div layout="row">
-<div layout="column">
-
-<div layout="column" style="padding:10px ;  margin-right: 55% ">
-
-  
+  <md-content class="md-padding">
+    <md-tabs md-dynamic-height md-border-bottom   md-selected="selectedIndex" >
+      <md-tab label="A1"  >
+        <md-content class="md-padding">
+     
+           
    <div style="color:blue;"> logged-in: {{ currentUser | displayName }}  </div>
+
     
-    <md-input-container  layout="row">      
+    <div layout="column"> 
+    <md-input-container  layout="flex"  >      
     <label>Meeting Time</label>
-    <md-select ng-model="startTimeMeeting" style="margin-left: 25% ; margin-right: 10% ; "  >
+    <md-select ng-model="startTimeMeeting" >
           <md-option ng-repeat="timeSelect in officeTime"  value="{{ timeSelect }}" >  {{ timeSelect }} </md-option>
    </md-select>
    </md-input-container  >  
  
-    <md-input-container layout="row" > 
+    <md-input-container  layout="flex"  > 
     <label>Meeting Duration</label>   
-    <md-select ng-model="timeMeeting"  style="margin-left: 25% ; margin-right: 10% ; "  >
+    <md-select ng-model="timeMeeting"  >
           <md-option ng-repeat="duration in ['30min','60min','90min']" value="{{ duration }}" >  {{ duration }} </md-option>
    </md-select>
    </md-input-container>    
        
-    <md-input-container layout="row" > 
+    <md-input-container  layout="flex"  > 
      <label>Meeting Location</label>
-    <md-select ng-model="placeMeeting" style="margin-left: 25% ; margin-right: 10% "  >
+    <md-select ng-model="placeMeeting"  >
           <md-option ng-repeat="loc in locations" value="{{ loc.name }}" >  {{ loc.name }} </md-option>
     </md-select>   
    </md-input-container>
 
-    <md-input-container layout="row" >
+    <md-input-container  layout="flex"  >
     <label>Room</label>
-    <md-select ng-model="roomMeeting" style="margin-left: 25% ; margin-right: 10% "  >
+    <md-select ng-model="roomMeeting"  >
           <md-option ng-repeat="room in rooms" value="{{ room._id}} " >  
           {{ room.name }} , size: {{ room.capacity }} , {{ room.attr  }} </md-option>
     </md-select>   
    </md-input-container>
 
-Selected room: {{ getRoomById ( roomMeeting ) }}
 
 
+   <md-button class="md-raised md-primary"  ng-if=" ! reservationInprogress "   
+   ng-click="precheckMeetingButton(placeMeeting , startTimeMeeting )" >
+   Check Bookings</md-button>
 
-</div>  
-</div>  
-
-
-  <div   layout="column" style="padding:20px">
-  <div ng-if="reservationInprogress">
-    <h3>   {{ prebookingMsg  }}    </h3>   
+   </div>  
+  
+    </md-content>
+      </md-tab>
+      <md-tab label="two">
+        <md-content class="md-padding">
+ 
+     <h3>   {{ prebookingMsg  }}    </h3>   
+     <h4> Selected room: {{ getRoomById ( roomMeeting ) }}  </h4> 
      testing : {{ selected_timeMeeting }}   
 
      <div layout="row">
@@ -59,21 +64,19 @@ Selected room: {{ getRoomById ( roomMeeting ) }}
     <md-button class="md-raised md-primary"   
      ng-click="selectMeetingButton()" >
        CANCEL</md-button>
-  </div>
-  </div>
-  </div>
+     </div>
+     
 
-</div>
-
-  
-  <div  ng-controller="Locations2ListCtrl"  >
-   <md-button class="md-raised md-primary"  ng-if=" ! reservationInprogress "   
-   ng-click="precheckMeetingButton(placeMeeting , startTimeMeeting )" >
-   Check Bookings</md-button>
    
-   </div>
-
-    
+   
+          </md-content>
+      </md-tab>     
+    </md-tabs>
+  </md-content>
+  
+  
+  
+      
   <div style="padding: 30px">
    <md-whiteframe ng-repeat="m in meetings " class="md-whiteframe-z3" layout 
    layout-align="center center"  style="margin: 5px ; padding: 3px;">  
@@ -87,4 +90,5 @@ Selected room: {{ getRoomById ( roomMeeting ) }}
 
     </md-whiteframe>   
    </div>
+   
    

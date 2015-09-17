@@ -22,6 +22,16 @@ angular.module("table").config(['$urlRouterProvider', '$stateProvider', '$locati
         templateUrl: 'client/login/views/login-start.ng.html',
         controller: 'LoginCtrl'
       })
+        .state('meetings', {
+        url: '/metings',
+        templateUrl: 'client/meetings/views/meetings-list.ng.html',
+        controller: 'MeetingsListCtrl',
+        resolve: {
+          "currentUser": ["$meteor", function($meteor){
+            return $meteor.requireUser();
+          }]        
+        }
+      })
         .state('locations', {
         url: '/locations',
         templateUrl: 'client/locations/views/locations-list.ng.html',

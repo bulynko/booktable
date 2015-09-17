@@ -1,0 +1,16 @@
+body {
+
+    background-color: rgba(0,0,0,.04);
+
+}
+
+table md-pagination-wrapper {
+display:none !important;
+height: 2px;
+
+}
+
+md-tabs-wrapper   {
+display:none ;
+
+}

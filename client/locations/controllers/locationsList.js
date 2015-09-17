@@ -13,6 +13,8 @@ angular.module("table").controller("LocationsListCtrl", ['$scope', '$meteor', '$
   //  $scope.rooms = $meteor.collection(Rooms).subscribe('rooms');
     $scope.meetings = $meteor.collection(Meetings).subscribe('meetings');
 
+    $rootScope.prebookingMsg="Schedule ......";    
+    $scope.selectedIndex = 0;
 
     $scope.rooms = $meteor.collection(function() { 
 
@@ -32,51 +34,64 @@ angular.module("table").controller("LocationsListCtrl", ['$scope', '$meteor', '$
                        '12:00','12:30','13:00','13:30','14:00','14:30','15:00','15:30',
                        '16:00','16:30','17:00','17:30','18:00','18:30','19:00','19:30' ];
    
+
+  $scope.precheckMeetingButton = function(loc, t) {
+     $rootScope.prebookingMsg="Meeting : "+ loc + "  at "+ t + " / "+ $rootScope.selected_timeMeeting;    
+     $rootScope.reservationInprogress=true;
+     $scope.selectedIndex = 1; 
+  };     
+     
      
   $scope.confirmMeetingButton = function(uid,loc,room, start_t,duration ) {
-
-
      Meteor.call("reserveMeeting",uid,"Team-Meeting",loc,room , $scope.getRoomById( room ) , start_t,duration);  
      console.log(" Registering a meeting ..... ");
      $rootScope.reservationInprogress=false;  
+ 	  $scope.selectedIndex = 0; 
   };
 
-  $scope.removeMeetingButton = function(id) {
 
+ $scope.setTabIndex = function(idx){
+  	 $scope.selectedIndex = idx;
+    return 1;
+  };
+
+
+
+  $scope.removeMeetingButton = function(id) {
      Meteor.call("cancelMeeting",id);  
      console.log(" Cancel a meeting ..... "+id);
-   
   };
 
   $scope.selectMeetingButton = function() {
      $rootScope.reservationInprogress=false;
+     $scope.selectedIndex = 0;
   };
-
+    
   
    $scope.getRoomById = function(roomId){
       var room_name;
       
          room_name=Rooms.findOne(roomId).name;
-    
+
       return room_name;
     };
 
-
 }]);
+  //  $scope.u2="Schedule ......";    
 
 
-angular.module("table").controller("Locations2ListCtrl", ['$scope', '$meteor', '$rootScope', '$state',
+angular.module("tableOLD").controller("Locations2ListCtrl", ['$scope', '$meteor', '$rootScope', '$state',
   function($scope, $meteor, $rootScope, $state){
 
     $scope.users2 = $meteor.collection(Meteor.users, false).subscribe('users');  
    // $scope.isLoggedIn = isLoggedIn;
   //  $scope.currentUser = AuthService.currentUser();
-  //  $scope.u2="Schedule ......";    
    $rootScope.prebookingMsg="Schedule ......";    
 
-  $scope.precheckMeetingButton = function(loc, t) {
-     $rootScope.reservationInprogress=true;
+  $scope.precheckMeetingButtonOLD = function(loc, t) {
      $rootScope.prebookingMsg="Meeting : "+ loc + "  at "+ t + " / "+ $rootScope.selected_timeMeeting;    
+     $rootScope.reservationInprogress=true;
+     
   //console.log(" testing ..... ");   
    
   };

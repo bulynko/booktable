@@ -12,7 +12,6 @@
 
    <div ng-if="!currentUser" >   
       <meteor-include src="loginButtons"></meteor-include> 
-      <md-progress-circular class="md-accent" md-mode="indeterminate"></md-progress-circular>    
    </div>     
     
    
@@ -21,9 +20,10 @@
        LOGOUT </md-button>    
     </div>    
      
-    <span flex> <div align="center">BOOK MY PLACE {{ currentUser.emails }} </div> </span>   
+    <span flex> <div align="center">BOOK MY PLACE  </div> </span>   
 
     <div style="padding-right: 20px">
+      <a href="/meetings">Meetings</a>
       <a href="/locations">Locations</a>
       <a href="/login">Lo</a>
     </div>
