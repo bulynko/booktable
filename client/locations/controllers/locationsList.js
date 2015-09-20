@@ -44,20 +44,19 @@ angular.module("table").controller("LocationsListCtrl", ['$scope', '$meteor', '$
      
   $scope.confirmMeetingButton = function(uid,loc,room, start_t,duration ) {
 
-     var chkMeeting=Meetings.find({start_t : start_t , room : room}).fetch()[0];    
+   //  var chkMeeting=Meetings.find({start_t : start_t , room : room}).fetch()[0];    
 
-     if ( typeof(chkMeeting) != "undefined" )
-     {
-       console.log(" 1-Meeting found : "+chkMeeting.name+ "  time:"+ chkMeeting.start_t +"  room:"+room );
-       $rootScope.prebookingMsg=" ROOM NOT AVAILABLE ";      
-     }
-     else {
-
+  //   if ( typeof(chkMeeting) != "undefined" )
+  //   {
+  //     console.log(" 1-Meeting found : "+chkMeeting.name+ "  time:"+ chkMeeting.start_t +"  room:"+room );
+  //     $rootScope.prebookingMsg=" ROOM NOT AVAILABLE ";      
+  //   }
+  //   else {
      Meteor.call("reserveMeeting",uid,"Team-Meeting",loc,room , $scope.getRoomById( room ) , start_t,duration);  
      console.log(" Registering a meeting ..... ");
      $rootScope.reservationInprogress=false;  
  	  $scope.selectedIndex = 0; 
-     }
+   //  }     
   };
 
 
@@ -65,7 +64,6 @@ angular.module("table").controller("LocationsListCtrl", ['$scope', '$meteor', '$
   	 $scope.selectedIndex = idx;
     return 1;
   };
-
 
 
   $scope.removeMeetingButton = function(id) {
@@ -85,10 +83,6 @@ angular.module("table").controller("LocationsListCtrl", ['$scope', '$meteor', '$
       return room_name;
     };
 
-
-$scope.isUndefinedOrNull = function(val) {
-    return angular.isUndefined(val) || val === null 
-}
 
 
 

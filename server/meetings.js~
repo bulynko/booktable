@@ -8,11 +8,10 @@
 //Meteor.publish("meetings", function (options,searchString) {
 
 Meteor.publish("meetings", function () {
-  if (searchString == null) searchString = '';
+
 
   return Meetings.find({
- //   'name' : { '$regex' : '.*' + searchString || '' + '.*', '$options' : 'i' },
-    $or:[
+     $or:[
       {$and:[
         {"public": true},
         {"public": {$exists: true}}

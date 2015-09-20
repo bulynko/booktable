@@ -1,14 +1,6 @@
 
-//Meteor.publish("meetings", function (options, searchString) {
-//return Meetings.find({});
-//});
-
-
-
-//Meteor.publish("meetings", function (options,searchString) {
 
 Meteor.publish("meetings", function () {
-
 
   return Meetings.find({
      $or:[
@@ -22,4 +14,7 @@ Meteor.publish("meetings", function () {
       ]}
     ]} );
 });
+
+
+
 
