@@ -23,7 +23,7 @@ angular.module("table").config(['$urlRouterProvider', '$stateProvider', '$locati
         controller: 'LoginCtrl'
       })
         .state('meetings', {
-        url: '/metings',
+        url: '/meetings',
         templateUrl: 'client/meetings/views/meetings-list.ng.html',
         controller: 'MeetingsListCtrl',
         resolve: {

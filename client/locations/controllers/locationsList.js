@@ -11,14 +11,14 @@ angular.module("table").controller("LocationsListCtrl", ['$scope', '$meteor', '$
     $scope.users = $meteor.collection(Meteor.users, false).subscribe('users');
     $scope.locations = $meteor.collection(Locations).subscribe('locations');
   //  $scope.rooms = $meteor.collection(Rooms).subscribe('rooms');
-    $scope.meetings = $meteor.collection(Meetings).subscribe('meetings');
+     $scope.meetings = $meteor.collection(Meetings).subscribe('meetings');
 
-    $rootScope.prebookingMsg="Schedule ......";    
-    $scope.selectedIndex = 0;
+     $rootScope.prebookingMsg="Schedule ......";    
+     $scope.selectedIndex = 0;
 
-    $scope.rooms = $meteor.collection(function() { 
+     $scope.rooms = $meteor.collection(function() { 
 
-      return Rooms.find({loc : $scope.getReactively('placeMeeting')  })
+     return Rooms.find({loc : $scope.getReactively('placeMeeting')  })
     });
 
 
@@ -43,10 +43,21 @@ angular.module("table").controller("LocationsListCtrl", ['$scope', '$meteor', '$
      
      
   $scope.confirmMeetingButton = function(uid,loc,room, start_t,duration ) {
+
+     var chkMeeting=Meetings.find({start_t : start_t , room : room}).fetch()[0];    
+
+     if ( typeof(chkMeeting) != "undefined" )
+     {
+       console.log(" 1-Meeting found : "+chkMeeting.name+ "  time:"+ chkMeeting.start_t +"  room:"+room );
+       $rootScope.prebookingMsg=" ROOM NOT AVAILABLE ";      
+     }
+     else {
+
      Meteor.call("reserveMeeting",uid,"Team-Meeting",loc,room , $scope.getRoomById( room ) , start_t,duration);  
      console.log(" Registering a meeting ..... ");
      $rootScope.reservationInprogress=false;  
  	  $scope.selectedIndex = 0; 
+     }
   };
 
 
@@ -70,11 +81,16 @@ angular.module("table").controller("LocationsListCtrl", ['$scope', '$meteor', '$
   
    $scope.getRoomById = function(roomId){
       var room_name;
-      
          room_name=Rooms.findOne(roomId).name;
-
       return room_name;
     };
+
+
+$scope.isUndefinedOrNull = function(val) {
+    return angular.isUndefined(val) || val === null 
+}
+
+
 
 }]);
   //  $scope.u2="Schedule ......";    

@@ -22,6 +22,11 @@ angular.module("table").config(['$urlRouterProvider', '$stateProvider', '$locati
         templateUrl: 'client/login/views/login-start.ng.html',
         controller: 'LoginCtrl'
       })
+        .state('registerUser', {
+        url: '/register',
+        templateUrl: 'client/login/views/register-user.ng.html',
+        controller: 'LoginCtrl'
+      })
         .state('meetings', {
         url: '/meetings',
         templateUrl: 'client/meetings/views/meetings-list.ng.html',

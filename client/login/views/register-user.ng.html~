@@ -1,0 +1,37 @@
+<div layout="column" style="padding-left: 20%; padding-right:20%">
+<form>
+
+    <md-input-container style="padding: 10px" >
+      <label>access code</label>
+      <input ng-model="myuser.code" >
+    </md-input-container>
+
+    <md-input-container style="padding: 10px" >
+      <label>login email</label>
+      <input ng-model="myuser.email"  type="email">
+    </md-input-container>
+
+    <md-input-container  style="padding: 10px">
+      <label>password</label>
+      <input ng-model="myuser.password" type="password">
+    </md-input-container>
+
+    <md-input-container  style="padding: 10px">
+      <label>password verification</label>
+      <input ng-model="myuser.password2" type="password">
+    </md-input-container>
+
+    <font color="red">{{ registerErrorMessage }} </font>
+    
+    <md-input-container  style="padding: 20px">
+      <md-button class="md-raised md-primary"  ng-click="registerUserButton(myuser)" 
+       align="center"> REGISTER </md-button> 
+    </md-input-container>
+    
+    <md-input-container  style="padding: 30px">
+      <md-button ng-controller="LoginCtrl" class="md-raised md-primary"  ng-href="/loginStart"  > 
+      CANCEL </md-button> 
+    </md-input-container>
+       
+</form>  
+</div>

@@ -8,17 +8,17 @@
 
 
   <md-toolbar  md-scroll-shrink layout="row" layout-align="start center" layout-padding>
-
-
-   <div ng-if="!currentUser" >   
-      <meteor-include src="loginButtons"></meteor-include> 
-   </div>     
     
    
     <div class="container" ng-if="currentUser">   
       <md-button ng-controller="LoginCtrl" class="md-raised md-primary"  ng-click="userLogout()" > 
        LOGOUT </md-button>    
     </div>    
+
+    <div class="container" ng-if="! currentUser">   
+      <md-button ng-controller="LoginCtrl" class="md-raised md-primary"  ng-href="/register"  > 
+       REGISTER </md-button>    
+    </div>         
      
     <span flex> <div align="center">BOOK MY PLACE  </div> </span>   
 
