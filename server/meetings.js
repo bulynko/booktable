@@ -15,6 +15,8 @@ Meteor.publish("meetings", function () {
     ]} );
 });
 
-
+Meteor.publish("allMeetings", function () {
+  return Meetings.find({}, {fields: {_id: 1, room: 1, room_name: 1 , start_t : 1 }});
+});
 
 

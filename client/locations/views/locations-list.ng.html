@@ -10,6 +10,16 @@
 
     
     <div layout="column"> 
+
+
+    <md-input-container  layout="flex"  >      
+    <label>Meeting Date</label>
+    <md-select ng-model="startDateMeeting" >
+          <md-option ng-repeat="dateSelect in officeDate"  value="{{ dateSelect  |date : format : fullDate }}" > 
+             {{ dateSelect |date : format : fullDate }} </md-option>
+   </md-select>
+   </md-input-container  > 
+        
     <md-input-container  layout="flex"  >      
     <label>Meeting Time</label>
     <md-select ng-model="startTimeMeeting" >
@@ -20,7 +30,7 @@
     <md-input-container  layout="flex"  > 
     <label>Meeting Duration</label>   
     <md-select ng-model="timeMeeting"  >
-          <md-option ng-repeat="duration in ['30min','60min','90min']" value="{{ duration }}" >  {{ duration }} </md-option>
+          <md-option ng-repeat="duration in ['30','60','90']" value="{{ duration }}" >  {{ duration }} min</md-option>
    </md-select>
    </md-input-container>    
        
@@ -58,7 +68,7 @@
 
      <div layout="row">
      <md-button class="md-raised md-primary"    style="width: 60%" 
-     ng-click="confirmMeetingButton(currentUser._id ,placeMeeting ,roomMeeting  ,startTimeMeeting, timeMeeting )" >
+     ng-click="confirmMeetingButton(currentUser._id ,placeMeeting ,roomMeeting  ,startTimeMeeting, timeMeeting ) " >
        Confirm Reservation  </md-button>
        
     <md-button class="md-raised md-primary"   
@@ -85,10 +95,16 @@
      <span flex></span>  
      <div  align="right" >
        <md-button class="md-raised md-primary"  
-       ng-click="removeMeetingButton(m._id)" >X</md-button>
+       ng-click="removeMeetingButton(m._id)  ; showSimpleToast()" >X</md-button>
+       
+       
      </div>
 
     </md-whiteframe>   
+    
+
+ 
+    
    </div>
    
    

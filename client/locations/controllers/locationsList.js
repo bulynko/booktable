@@ -3,7 +3,8 @@ angular.module("table").controller("LocationsListCtrl", ['$scope', '$meteor', '$
  
     console.log(" Controller for list 1 ..... ");
 
-    $scope.timeMeeting="60min";
+
+    $scope.timeMeeting="60";
     $scope.startTimeMeeting="10:00";
     $scope.placeMeeting="GBM-HO"
     $rootScope.reservationInprogress=false;
@@ -21,31 +22,52 @@ angular.module("table").controller("LocationsListCtrl", ['$scope', '$meteor', '$
      return Rooms.find({loc : $scope.getReactively('placeMeeting')  })
     });
 
-
     $meteor.subscribe('rooms'); 
    
     $meteor.autorun($scope, function() {
-      $rootScope.selected_timeMeeting=$scope.getReactively('timeMeeting'); 
-      $scope.roomMeeting=$scope.getReactively('rooms[0]._id'); 
+    $rootScope.selected_timeMeeting=$scope.getReactively('timeMeeting'); 
+    $scope.roomMeeting=$scope.getReactively('rooms[0]._id'); 
   });
-
 
    $scope.officeTime=[ '08:00','08:30','09:00','09:30','10:00','10:30','11:00','11:30',
                        '12:00','12:30','13:00','13:30','14:00','14:30','15:00','15:30',
                        '16:00','16:30','17:00','17:30','18:00','18:30','19:00','19:30' ];
    
 
+       $scope.startDateMeeting=new Date();
+       var d = moment(new Date());
+       //var d2 = moment(new Date()).add(1,"days");
+          
+    //  d.add(1,"days");
+   //      d.add(2,'days') ;
+   ///   myt =new Array(20);
+     
+      //for (var i = 0; i < 10; i++)
+      //{
+      //Locations.insert({name: loc[i].name, description: loc[i].description});
+      
+     // myt[i]=i;
+     // }
+
+     $scope.officeDate =[ d , new Date()];
+       
+       
+      // new Date(
+      // d.getFullYear(),
+      // d.getMonth() ,
+      // d.getDay() +1 )  ];
+ 
+    
+   
   $scope.precheckMeetingButton = function(loc, t) {
      $rootScope.prebookingMsg="Meeting : "+ loc + "  at "+ t + " / "+ $rootScope.selected_timeMeeting;    
      $rootScope.reservationInprogress=true;
      $scope.selectedIndex = 1; 
   };     
-     
-     
+       
   $scope.confirmMeetingButton = function(uid,loc,room, start_t,duration ) {
 
    //  var chkMeeting=Meetings.find({start_t : start_t , room : room}).fetch()[0];    
-
   //   if ( typeof(chkMeeting) != "undefined" )
   //   {
   //     console.log(" 1-Meeting found : "+chkMeeting.name+ "  time:"+ chkMeeting.start_t +"  room:"+room );
@@ -57,6 +79,7 @@ angular.module("table").controller("LocationsListCtrl", ['$scope', '$meteor', '$
      $rootScope.reservationInprogress=false;  
  	  $scope.selectedIndex = 0; 
    //  }     
+   
   };
 
 
@@ -82,6 +105,7 @@ angular.module("table").controller("LocationsListCtrl", ['$scope', '$meteor', '$
          room_name=Rooms.findOne(roomId).name;
       return room_name;
     };
+
 
 
 

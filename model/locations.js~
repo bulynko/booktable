@@ -1,6 +1,4 @@
 Locations = new Mongo.Collection("locations");
 Rooms = new Mongo.Collection("rooms");
 Meetings = new Mongo.Collection("meetings");
-
-
-
+AllMeetings = new Mongo.Collection("meetings");

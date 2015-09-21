@@ -6,6 +6,13 @@
 
 <body layout="column">
 
+<md-toast align="center"  style="display:none">
+  <span flex>Custom toast!</span>
+  <md-button ng-click="closeToast()">
+    Close
+  </md-button>
+</md-toast>
+
 
   <md-toolbar  md-scroll-shrink layout="row" layout-align="start center" layout-padding>
     
