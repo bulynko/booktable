@@ -1,7 +1,7 @@
 Meteor.methods({
 
    //======================================================================================
-    reserveMeeting: function (uid,title,loc,room,room_name ,argStartTime,argEndTime, argDate ) {
+    reserveMeeting: function (uid,title,loc,argRoom,room_name ,argStartTime,argEndTime, argDate ) {
 
      //var chkMeeting=Meetings.find({start_t : start_t , room : room, }).fetch()[0];    
   //   var chkMeeting=Meetings.find({start_t : { $lte: start_t  }, day : start_d ,room : room}).fetch()[0];      
@@ -20,12 +20,12 @@ Meteor.methods({
 
      if ( typeof(chkMeeting) != "undefined" )
      {
-       console.log(" 1-Meeting found : "+chkMeeting.name+"  date:" + argDate+ "  time:"+ chkMeeting.start_t +"  room:"+room );
+       console.log(" 1-Meeting found : "+chkMeeting.name+"  date:" + argDate+ "  time:"+ chkMeeting.start_t +"  room:"+argRoom );
        resultMsg=" ROOM NOT AVAILABLE ";      
      }
      else {
      console.log(" joining  meeting ..... "+chkMeeting) 
-     Meetings.insert({ uid: uid, name: title, loc: loc,room: room, room_name: room_name ,day: argDate ,start_t: argStartTime, end_t: argEndTime}); 
+     Meetings.insert({ uid: uid, name: title, loc: loc,room: argRoom, room_name: room_name ,day: argDate ,start_t: argStartTime, end_t: argEndTime}); 
     }  
     return resultMsg;
   },

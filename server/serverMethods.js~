@@ -1,13 +1,21 @@
 Meteor.methods({
 
    //======================================================================================
-    reserveMeeting: function (uid,title,loc,room,room_name ,argStartTime,argEndTime, argDate ) {
+    reserveMeeting: function (uid,title,loc,argRoom,room_name ,argStartTime,argEndTime, argDate ) {
 
      //var chkMeeting=Meetings.find({start_t : start_t , room : room, }).fetch()[0];    
   //   var chkMeeting=Meetings.find({start_t : { $lte: start_t  }, day : start_d ,room : room}).fetch()[0];      
  
- 
- 
+ //-----------------
+     var chkMeeting=Meetings.find({ 
+      $or : [
+      { $and:  [ {start_t :  { $lte: argStartTime }} , {end_t : { $gt: argStartTime }} ] } ,
+      { $and:  [ {start_t :  { $lt: argEndTime }} , {end_t : { $gte: argEndTime }} ] }
+      ] ,
+      
+      day : argDate ,room : argRoom}).fetch()[0];    
+   //---------------------------------------
+   
      var resultMsg="OK";
 
      if ( typeof(chkMeeting) != "undefined" )
