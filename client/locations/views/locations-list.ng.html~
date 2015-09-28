@@ -8,15 +8,15 @@
            
    <div style="color:blue;"> logged-in: {{ currentUser | displayName }}  </div>
 
-    
     <div layout="column"> 
-
 
     <md-input-container  layout="flex"  >      
     <label>Meeting Date</label>
     <md-select ng-model="startDateMeeting" >
-          <md-option ng-repeat="dateSelect in officeDate"  value="{{ dateSelect  |date : format : fullDate }}" > 
-             {{ dateSelect |date : format : fullDate }} </md-option>
+       <md-option  value="{{ startDateMeeting  | displayDateD  }}" selected > 
+             {{ startDateMeeting | displayDateDD }}   <font color="green">TODAY</font></md-option>
+          <md-option ng-repeat="dateSelect in officeDate"  value="{{ dateSelect  | displayDateD  }}" > 
+             {{ dateSelect | displayDateDD }} </md-option>
    </md-select>
    </md-input-container  > 
         
@@ -30,7 +30,7 @@
     <md-input-container  layout="flex"  > 
     <label>Meeting Duration</label>   
     <md-select ng-model="timeMeeting"  >
-          <md-option ng-repeat="duration in ['30','60','90']" value="{{ duration }}" >  {{ duration }} min</md-option>
+          <md-option ng-repeat="duration in ['30','60','90','120']" value="{{ duration }}" >  {{ duration }} min</md-option>
    </md-select>
    </md-input-container>    
        
@@ -51,9 +51,9 @@
 
 
 
-   <md-button class="md-raised md-primary"  ng-if=" ! reservationInprogress "   
-   ng-click="precheckMeetingButton(placeMeeting , startTimeMeeting )" >
-   Check Bookings</md-button>
+   <md-button class="md-raised md-primary"     
+   ng-click="precheckMeetingButton(placeMeeting , roomMeeting , startDateMeeting ,  startTimeMeeting )" >
+   Check  Room  Availability</md-button>
 
    </div>  
   
@@ -68,44 +68,42 @@
 
      <div layout="row">
      <md-button class="md-raised md-primary"    style="width: 60%" 
-     ng-click="confirmMeetingButton(currentUser._id ,placeMeeting ,roomMeeting  ,startTimeMeeting, timeMeeting ) " >
+     ng-click="confirmMeetingButton(currentUser._id ,placeMeeting ,roomMeeting  ,startTimeMeeting, timeMeeting , startDateMeeting) " >
        Confirm Reservation  </md-button>
        
     <md-button class="md-raised md-primary"   
      ng-click="selectMeetingButton()" >
        CANCEL</md-button>
      </div>
-     
-
-   
-   
+    
           </md-content>
       </md-tab>     
     </md-tabs>
   </md-content>
   
   
-  
+
       
   <div style="padding: 30px">
+  
+   Booking Message :  {{ myMethodResult2 }}
+    
    <md-whiteframe ng-repeat="m in meetings " class="md-whiteframe-z3" layout 
    layout-align="center center"  style="margin: 5px ; padding: 3px;">  
   
-     <div> {{ m.name }}  {{ m.loc }}/{{ m.room_name}}  {{m.start_t}}  {{ m.end_t}} </div>   
+     <div> {{ m.name }}  {{ m.loc }}/{{ m.room_name}}  {{m.start_t}} - {{ m.end_t}} </div>   
      <span flex></span>  
      <div  align="right" >
        <md-button class="md-raised md-primary"  
        ng-click="removeMeetingButton(m._id)  ; showSimpleToast()" >X</md-button>
        
-      <md-button class="md-raised md-primary"  
-       ng-click="showSimpleToast()" >??</md-button>
        
      </div>
 
     </md-whiteframe>   
     
 
- 
+
     
    </div>
    
