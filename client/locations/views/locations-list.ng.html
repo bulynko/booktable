@@ -52,7 +52,7 @@
 
 
    <md-button class="md-raised md-primary"     
-   ng-click="precheckMeetingButton(placeMeeting , roomMeeting , startDateMeeting ,  startTimeMeeting )" >
+   ng-click="precheckMeetingButton(placeMeeting , roomMeeting , startDateMeeting ,  startTimeMeeting , timeMeeting)" >
    Check  Availability</md-button>
 
    </div>  
@@ -91,13 +91,11 @@
    <md-whiteframe ng-repeat="m in meetings " class="md-whiteframe-z3" layout 
    layout-align="center center"  style="margin: 5px ; padding: 3px;">  
   
-     <div> {{ m.name }}  {{ m.loc }}/{{ m.room_name}}  {{m.start_t}} - {{ m.end_t}} </div>   
+     <div> {{ m.name }}  {{ m.loc }}/{{ m.room_name}}  [{{ m.day  }}] {{m.start_t}} - {{ m.end_t}} </div>   
      <span flex></span>  
      <div  align="right" >
        <md-button class="md-raised md-primary"  
-       ng-click="removeMeetingButton(m._id)  ; showSimpleToast()" >X</md-button>
-       
-       
+       ng-click="removeMeetingButton(m._id)  ; showSimpleToast()" >X</md-button>    
      </div>
 
     </md-whiteframe>   

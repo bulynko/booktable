@@ -3,8 +3,7 @@ angular.module("table").controller("LocationsListCtrl", ['$scope', '$meteor', '$
  
     console.log(" Controller for list 1 ..... ");
 
-     $meteor.session('precheckInfo').bind($scope, 'myMethodResult2');
-
+    $meteor.session('precheckInfo').bind($scope, 'myMethodResult2');
     $rootScope.reservationInprogress=false;     
     $scope.timeMeeting="60";
     $scope.startTimeMeeting="10:00";
@@ -19,6 +18,7 @@ angular.module("table").controller("LocationsListCtrl", ['$scope', '$meteor', '$
      $rootScope.prebookingMsg="Schedule ......";    
      $scope.selectedIndex = 0;
 
+   //===================================================================
      $scope.rooms = $meteor.collection(function() { 
      return Rooms.find({loc : $scope.getReactively('placeMeeting')  })
     });
@@ -38,9 +38,6 @@ angular.module("table").controller("LocationsListCtrl", ['$scope', '$meteor', '$
                        '16:00','16:30','17:00','17:30','18:00','18:30','19:00','19:30' ];
    
 
-    //   $scope.startDateMeeting=moment(new Date());
-
-
      var ld = new Array(15);
      for (var i = 0 ; i < 10 ; i++)
      {
@@ -53,12 +50,17 @@ angular.module("table").controller("LocationsListCtrl", ['$scope', '$meteor', '$
 
 
 //=====================================================================================
-  $scope.precheckMeetingButton = function(loc, roomID , d, t) {
-     $rootScope.prebookingMsg="Meeting : "+ loc + "  at "+ t + " / "+ $rootScope.selected_timeMeeting;    
+  $scope.precheckMeetingButton = function(loc, roomID , day, start_t, duration) {
+
+     $rootScope.prebookingMsg="Meeting : "+ loc + "  at "+ t1 + " / "+ $rootScope.selected_timeMeeting;    
      $rootScope.reservationInprogress=true;
      $scope.selectedIndex = 1;
      
-     Meteor.call('precheckMeeting', t, d ,roomID, function(error, result){
+     var end_t = new moment(  "2015-01-01 " + start_t); 
+  	  end_t.add(duration,"m");
+     //var  start_d  = new moment( day );	     
+     
+     Meteor.call('precheckMeeting', start_t , end_t.format('HH:mm') , day ,roomID, function(error, result){
      Session.set('precheckInfo', result); 
      //$scope.myMethodResult="call back ...";
      console.log(" Meteor.call precheckMeeting , result: "+ result); 
@@ -68,11 +70,16 @@ angular.module("table").controller("LocationsListCtrl", ['$scope', '$meteor', '$
            
   //========================================================================================================       
     $scope.confirmMeetingButton = function(uid,loc,room, start_t,duration , day ) {    
+
      var end_t = new moment(  "2015-01-01 " + start_t); 
   	  end_t.add(duration,"m");
-     var  start_d  = new moment( day );	  
-  	  //start_d = new moment(day);
-     Meteor.call("reserveMeeting",uid,"Team-Meeting",loc,room , $scope.getRoomById( room ) , start_t,end_t.format('HH:mm'),day);  
+   //  var  start_d  = new moment( day );	  
+  	  
+     Meteor.call("reserveMeeting",uid,"Team-Meeting",loc,room , $scope.getRoomById( room ) , start_t,end_t.format('HH:mm'),day,
+      function(error, result){
+       Session.set('precheckInfo', result); 
+       console.log(" Meteor.call reserveMeeting , result: "+ result); 
+      } );  
  
      console.log(" Registering a meeting ..... ");
      $rootScope.reservationInprogress=false;  
