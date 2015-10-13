@@ -3,6 +3,7 @@ angular.module("table").controller("LocationsListCtrl", ['$scope', '$meteor', '$
  
     console.log(" Controller for list 1 ..... ");
 
+    $meteor.session('precheckConfirmed').bind($scope, 'precheckConfirmed');
     $meteor.session('precheckInfo').bind($scope, 'myMethodResult2');
     $rootScope.reservationInprogress=false;     
     $scope.timeMeeting="60";
@@ -91,6 +92,7 @@ angular.module("table").controller("LocationsListCtrl", ['$scope', '$meteor', '$
      Meteor.myFunctions.loadDataFreeTime(  $scope.officeTime, Meetings, day ,duration,roomID, 3);   
      
      Meteor.call('precheckMeeting', start_t , end_t.format('HH:mm') , day ,roomID, function(error, result){
+     Session.set('precheckConfirmed', result[0]); 
      Session.set('precheckInfo', result[1]); 
      //$scope.myMethodResult="call back ...";
      $scope.titleMeeting="Team Meeting";

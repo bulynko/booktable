@@ -54,28 +54,34 @@
 
    </div>  
   
-    </md-content>
+    </md-content >
       </md-tab>
+      
       <md-tab label="two">
-        <md-content class="md-padding">
+        <md-content class="md-padding"    >
  
+<div  ng-show=precheckConfirmed > 
      <h3>   {{ prebookingMsg  }}    </h3>   
      <h4> Selected room: {{ getRoomById ( roomMeeting ) }}  </h4> 
-     testing : {{ selected_timeMeeting }}   
-     Booking Message :  {{ myMethodResult2 }}
+     <font color="green"> {{ myMethodResult2 }} </font>
+</div>
 
+<div  ng-hide=precheckConfirmed >
 <md-content>
+<font color="red">  Room not available at {{ startTimeMeeting }}  </font>
+
 <md-radio-group ng-model="startTimeMeeting" layout="raw" >
       <div  ng-repeat="sTime in officeFreeTime "  layout="column" 
-      style="border:1px  solid black; background-color: {{ sTime.bckcolor }} " >
-      <md-radio-button  ng-value="sTime"  ng-disabled="sTime.isDisabled" > 
+      style="border:1px  solid black; background-color: {{ sTime.bckcolor }} ; padding:2px; " >
+      <md-radio-button  ng-value="sTime.start_t"  ng-disabled="sTime.isDisabled" > 
       </md-radio-button >
-      {{ sTime.start_t }}
+         <label> {{ sTime.start_t }} </label>
       </div>
       
        <md-radio-button  ng-value="sTime" > Test  </md-radio-button>  
  </md-radio-group>
 </md-content>
+</div>
 
     <md-input-container style="padding: 10px" >
       <label>Meeting Title</label>

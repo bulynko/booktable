@@ -51,18 +51,20 @@ Meteor.methods({
 //------------------
 
      var resultMsg="??";
+     var checkOK=true;
 
      if ( typeof(chkMeeting) != "undefined" )
      {
      	// resultMsg =  "ERROR ! " + argRoom+" - "+ " - "+ argDate+ " - "+argStartTime ;
      	 resultMsg = " Room already  booked : "+chkMeeting.name+ "  time:"+ chkMeeting.start_t   ;
        console.log(" Room already  booked : "+chkMeeting.name+ "  time:"+ chkMeeting.start_t +"  room:"+argRoom );
+       checkOK=false;
      }
      else {
      	  resultMsg =  "OK ! " + argRoom+" - "+argStartTime ;
         console.log(" Room is available  ..... "+chkMeeting+" -> "+argDate) 
      }    	
-      return resultMsg ; 
+      return [ checkOK , resultMsg] ; 
     },
 
 //--------------------------------
