@@ -12,12 +12,37 @@ angular.module("table").controller("LocationsListCtrl", ['$scope', '$meteor', '$
     
     $scope.users = $meteor.collection(Meteor.users, false).subscribe('users');
     $scope.locations = $meteor.collection(Locations).subscribe('locations');
-  //  $scope.rooms = $meteor.collection(Rooms).subscribe('rooms');
-     $scope.meetings = $meteor.collection(Meetings).subscribe('meetings');
+   //  $scope.rooms = $meteor.collection(Rooms).subscribe('rooms');
+   //  $scope.meetings =
+     $meteor.collection(Meetings).subscribe('meetings');
 
+     Persons = new Mongo.Collection(null);
+     OfficeFreeTime = new Mongo.Collection(null);
+      
+     $scope.meetings  = $meteor.collection(function() {
+    //  return Meetings.find({uid : $scope.currentUser._id }, { sort : 0});
+     return Meetings.find({ uid : $scope.currentUser._id  });
+    });      
+ 
+     $scope.allmeetings  = $meteor.collection(function() {
+     return Meetings.find({  });
+    });   
+ 
      $rootScope.prebookingMsg="Schedule ......";    
      $scope.selectedIndex = 0;
 
+      //$scope.dayRoomPlan = new Meteor.Collection( null );
+      //$scope.dayRoomPlan = new Meteor.Collection( null );
+      //$scope.dayRoomPlan.remove();
+      //$scope.dayRoomPlan.insert({ name: 'DDD' } );
+
+      Meteor.myFunctions.loadData($scope.currentUser.emails[0].address);
+      $scope.officeFreeTime = $meteor.collection(OfficeFreeTime);
+     
+     // Meteor.myFunctions.loadData2(Meetings);
+ 
+     $scope.tasks = $meteor.collection(Persons);
+  
    //===================================================================
      $scope.rooms = $meteor.collection(function() { 
      return Rooms.find({loc : $scope.getReactively('placeMeeting')  })
@@ -38,6 +63,9 @@ angular.module("table").controller("LocationsListCtrl", ['$scope', '$meteor', '$
                        '16:00','16:30','17:00','17:30','18:00','18:30','19:00','19:30' ];
    
 
+  // Meteor.myFunctions.loadDataFreeTime(  $scope.officeTime, Meetings,3);
+  // Meteor.myFunctions.loadData2(Meetings);
+ 
      var ld = new Array(15);
      for (var i = 0 ; i < 10 ; i++)
      {
@@ -49,33 +77,38 @@ angular.module("table").controller("LocationsListCtrl", ['$scope', '$meteor', '$
      $scope.officeDate =[ ld[1]  , ld[2] , ld[3] , ld[4] , ld[5] , ld[6] , ld[7] ];
 
 
+
 //=====================================================================================
   $scope.precheckMeetingButton = function(loc, roomID , day, start_t, duration) {
 
-     $rootScope.prebookingMsg="Meeting : "+ loc + "  at "+ t1 + " / "+ $rootScope.selected_timeMeeting;    
+     $rootScope.prebookingMsg="Meeting : "+ loc + "  at "+ start_t + " / "+ $rootScope.selected_timeMeeting;    
      $rootScope.reservationInprogress=true;
      $scope.selectedIndex = 1;
+
      
      var end_t = new moment(  "2015-01-01 " + start_t); 
   	  end_t.add(duration,"m");
      //var  start_d  = new moment( day );	     
+   
+     Meteor.myFunctions.loadDataFreeTime(  $scope.officeTime, Meetings, day ,duration,roomID, 3);   
      
      Meteor.call('precheckMeeting', start_t , end_t.format('HH:mm') , day ,roomID, function(error, result){
      Session.set('precheckInfo', result); 
      //$scope.myMethodResult="call back ...";
+     $scope.titleMeeting="Team Meeting";
      console.log(" Meteor.call precheckMeeting , result: "+ result); 
       });       
     };
          
            
   //========================================================================================================       
-    $scope.confirmMeetingButton = function(uid,loc,room, start_t,duration , day ) {    
+    $scope.confirmMeetingButton = function(uid,loc,room, start_t,duration , day , title ) {    
 
      var end_t = new moment(  "2015-01-01 " + start_t); 
   	  end_t.add(duration,"m");
    //  var  start_d  = new moment( day );	  
   	  
-     Meteor.call("reserveMeeting",uid,"Team-Meeting",loc,room , $scope.getRoomById( room ) , start_t,end_t.format('HH:mm'),day,
+     Meteor.call("reserveMeeting",uid,title,loc,room , $scope.getRoomById( room ) , start_t,end_t.format('HH:mm'),day,
       function(error, result){
        Session.set('precheckInfo', result); 
        console.log(" Meteor.call reserveMeeting , result: "+ result); 
@@ -107,18 +140,14 @@ angular.module("table").controller("LocationsListCtrl", ['$scope', '$meteor', '$
    
    //=================================================================
    $scope.getRoomById = function(roomId){
-      
          room_name=Rooms.findOne(roomId).name;
       return room_name;
     };
-
-
 }]);
 
-   //   var room_name;
   
 //######################################################################################################
-angular.module("tableOLD").controller("Locations2ListCtrl", ['$scope', '$meteor', '$rootScope', '$state',
+angular.module("table").controller("Locations2ListCtrlOLD", ['$scope', '$meteor', '$rootScope', '$state',
   function($scope, $meteor, $rootScope, $state){
       $scope.users2 = $meteor.collection(Meteor.users, false).subscribe('users');  
    // $scope.isLoggedIn = isLoggedIn;
@@ -132,3 +161,5 @@ angular.module("tableOLD").controller("Locations2ListCtrl", ['$scope', '$meteor'
 
 }]);
 //######################################################################################################
+
+

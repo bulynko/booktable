@@ -6,13 +6,6 @@
 
 <body layout="column">
 
-<md-toast align="center"  style="display:none">
-  <span flex>Custom toast!</span>
-  <md-button ng-click="closeToast()">
-    Close
-  </md-button>
-</md-toast>
-
 
   <md-toolbar  md-scroll-shrink layout="row" layout-align="start center" layout-padding>
     
@@ -20,7 +13,9 @@
     <div class="container" ng-if="currentUser">   
       <md-button ng-controller="LoginCtrl" class="md-raised md-primary"  ng-click="userLogout()" > 
        LOGOUT </md-button>    
+      
     </div>    
+
 
     <div class="container" ng-if="! currentUser">   
       <md-button ng-controller="LoginCtrl" class="md-raised md-primary"  ng-href="/register"  > 
@@ -29,11 +24,17 @@
      
     <span flex> <div align="center">BOOK MY PLACE  </div> </span>   
 
+<!--
     <div style="padding-right: 20px">
       <a href="/meetings">M</a>
       <a href="/locations">L</a>
     </div>
+-->
 
+    <div class="container" ng-if="! currentUser">   
+      <md-button ng-controller="LoginCtrl" class="md-raised md-primary"  ng-href="/register"  > 
+       REGISTER </md-button>    
+    </div>  
 
 
 

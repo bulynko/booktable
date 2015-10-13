@@ -15,5 +15,5 @@ less
 angular:angular-animate
 angular:angular-aria
 planettraining:material-design-icons
-angular:angular-material
 momentjs:moment
+angular:angular-material

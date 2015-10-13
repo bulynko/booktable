@@ -1,11 +1,9 @@
 
-
   <md-content class="md-padding">
     <md-tabs md-dynamic-height md-border-bottom   md-selected="selectedIndex" >
       <md-tab label="A1"  >
         <md-content class="md-padding">
-     
-           
+                
    <div style="color:blue;"> logged-in: {{ currentUser | displayName }}  </div>
 
     <div layout="column"> 
@@ -50,7 +48,6 @@
    </md-input-container>
 
 
-
    <md-button class="md-raised md-primary"     
    ng-click="precheckMeetingButton(placeMeeting , roomMeeting , startDateMeeting ,  startTimeMeeting , timeMeeting)" >
    Check  Availability</md-button>
@@ -65,10 +62,29 @@
      <h3>   {{ prebookingMsg  }}    </h3>   
      <h4> Selected room: {{ getRoomById ( roomMeeting ) }}  </h4> 
      testing : {{ selected_timeMeeting }}   
+     Booking Message :  {{ myMethodResult2 }}
+
+<md-content>
+<md-radio-group ng-model="startTimeMeeting" layout="raw" >
+      <div  ng-repeat="sTime in officeFreeTime "  layout="column" 
+      style="border:1px  solid black; background-color: {{ sTime.bckcolor }} " >
+      <md-radio-button  ng-value="sTime"  ng-disabled="sTime.isDisabled" > 
+      </md-radio-button >
+      {{ sTime.start_t }}
+      </div>
+      
+       <md-radio-button  ng-value="sTime" > Test  </md-radio-button>  
+ </md-radio-group>
+</md-content>
+
+    <md-input-container style="padding: 10px" >
+      <label>Meeting Title</label>
+      <input ng-model="titleMeeting">
+    </md-input-container>
 
      <div layout="row">
      <md-button class="md-raised md-primary"    style="width: 60%" 
-     ng-click="confirmMeetingButton(currentUser._id ,placeMeeting ,roomMeeting  ,startTimeMeeting, timeMeeting , startDateMeeting) " >
+     ng-click="confirmMeetingButton(currentUser._id ,placeMeeting ,roomMeeting  ,startTimeMeeting, timeMeeting , startDateMeeting , titleMeeting) " >
        Confirm Reservation  </md-button>
        
     <md-button class="md-raised md-primary"   
@@ -81,17 +97,45 @@
     </md-tabs>
   </md-content>
   
-  
-
-      
+        
   <div style="padding: 30px">
+
+
+ 
+ <div style="display: none">
   
-   Booking Message :  {{ myMethodResult2 }}
+ <h4> All-Meetings:</h4>
+   <ul>
+       <li ng-repeat="m1 in allmeetings "  >
+             time : {{ m1.name }}     {{ m1.day }}  {{ m1.start_t}}
+       </li>         
+   </ul>
+  
+   <h4> TASKS:</h4>
+     <ul>
+       <li ng-repeat="m2 in tasks "  >
+             time : {{ m2  }}     {{ m2.day }}
+       </li>         
+   </ul>
+    
+   <h4> Free-Time:</h4>
+     <ul>
+       <li ng-repeat="m3 in officeFreeTime "  >
+             time : {{ m3  }}     
+       </li>         
+   </ul>    
+
+</div>
+   
     
    <md-whiteframe ng-repeat="m in meetings " class="md-whiteframe-z3" layout 
    layout-align="center center"  style="margin: 5px ; padding: 3px;">  
-  
-     <div> {{ m.name }}  {{ m.loc }}/{{ m.room_name}}  [{{ m.day  }}] {{m.start_t}} - {{ m.end_t}} </div>   
+   
+     <div> 
+      <h3> {{ m.name }}  {{ m.loc }}/{{ m.room_name}}  </h3>
+      <h4> [{{ m.day  }}] {{m.start_t}} - {{ m.end_t}} </h4> 
+      </div>   
+ 
      <span flex></span>  
      <div  align="right" >
        <md-button class="md-raised md-primary"  
@@ -100,8 +144,6 @@
 
     </md-whiteframe>   
     
-
-
     
    </div>
    

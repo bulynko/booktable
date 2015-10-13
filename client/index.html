@@ -13,20 +13,27 @@
     <div class="container" ng-if="currentUser">   
       <md-button ng-controller="LoginCtrl" class="md-raised md-primary"  ng-click="userLogout()" > 
        LOGOUT </md-button>    
+      
     </div>    
 
+
     <div class="container" ng-if="! currentUser">   
-      <md-button ng-controller="LoginCtrl" class="md-raised md-primary"  ng-href="/register"  > 
-       REGISTER </md-button>    
+  HELLO 
     </div>         
      
     <span flex> <div align="center">BOOK MY PLACE  </div> </span>   
 
+<!--
     <div style="padding-right: 20px">
       <a href="/meetings">M</a>
       <a href="/locations">L</a>
     </div>
+-->
 
+    <div class="container" ng-if="! currentUser">   
+      <md-button ng-controller="LoginCtrl" class="md-raised md-primary"  ng-href="/register"  > 
+       REGISTER </md-button>    
+    </div>  
 
 
 
