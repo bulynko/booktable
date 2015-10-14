@@ -4,13 +4,16 @@ body {
 
 }
 
-table md-pagination-wrapper {
-display:none !important;
-height: 2px;
 
-}
+
 
 md-tabs-wrapper   {
 display:none ;
 
+}
+
+
+md-toolbar:not(.md-menu-toolbar) {
+	background-color: black !important;
+	
 }

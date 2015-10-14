@@ -11,3 +11,9 @@ md-tabs-wrapper   {
 display:none ;
 
 }
+
+
+md-toolbar:not(.md-menu-toolbar) {
+	background-color: black !important;
+	
+}
