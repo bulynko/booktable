@@ -73,8 +73,8 @@
 <md-radio-group ng-model="startTimeMeeting" layout="raw" >
       <div  ng-repeat="sTime in officeFreeTime "  layout="column" 
       style="border:1px  solid black; background-color: {{ sTime.bckcolor }} ; padding:2px; " >
-      <md-radio-button  ng-value="sTime.start_t"  ng-disabled="sTime.isDisabled" layout="column"  style="padding: auto" > 
-      <a>{{ sTime.start_t }} </a>      
+      <md-radio-button  ng-value="sTime.start_t"  ng-disabled="sTime.isDisabled" layout="column" > 
+       {{ sTime.start_t }}       
       </md-radio-button >
      
       </div>

@@ -1,15 +1,21 @@
-app.config(function($mdThemingProvider) {
+//angular.module('table').config(function($mdThemingProvider) {
+//  $mdThemingProvider.theme('default')
+//    .primaryPalette('pink')
+//    .accentPalette('orange');
+//});
 
-    $mdThemingProvider.theme('default')
-          .primaryPalette('orange')
-          .accentPalette('indigo')
-          .warnPalette('red')
-          .backgroundPalette('grey');
+angular.module('table').config(function($mdThemingProvider) {
 
-    $mdThemingProvider.theme('custom')
-          .primaryPalette('grey')
-          .accentPalette('deep-purple')
-          .warnPalette('green')
+   // $mdThemingProvider.theme('default2')
+   //       .primaryPalette('orange')
+   //       .accentPalette('indigo')
+   //       .warnPalette('red')
+   //       .backgroundPalette('grey');
+
+   // $mdThemingProvider.theme('custom')
+   //       .primaryPalette('grey')
+   //       .accentPalette('deep-purple')
+   //       .warnPalette('green')
 
     //create yr own palette 
     $mdThemingProvider.definePalette('amazingPaletteName', {
@@ -18,7 +24,7 @@ app.config(function($mdThemingProvider) {
         '200': 'ef9a9a',
         '300': 'e57373',
         '400': 'ef5350',
-       // '500': 'f44336',
+        '500': 'ff2200',
         '500': 'ffffff',
         '600': 'e53935',
         '700': 'd32f2f',
@@ -35,7 +41,7 @@ app.config(function($mdThemingProvider) {
         'contrastLightColors': undefined    // could also specify this if default was 'dark'
     });
 
-   $mdThemingProvider.theme('custom2')
+   $mdThemingProvider.theme('default')
         .primaryPalette('amazingPaletteName')
 
 })
