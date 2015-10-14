@@ -78,20 +78,31 @@ cursor.forEach(function(doc){
  for (var j = 0; j < lstTime.length; j++) {
  
    // rec=col.find({ start_t :  lstTime[j] }).fetch()[0];
-   //  end_t = new moment(  "2015-01-01 " + lstTime[j] ); 
-  	//  end_t.add(duration,"m");     
-   //   endTime=end_t.format('HH:mm');
+     end_t = new moment(  "2015-01-01 " + lstTime[j] ); 
+  	  end_t.add(duration,"m");     
+     endTime=end_t.format('HH:mm');
         
-      rec=col.find({ 
+      rec1=col.find({ 
       $or : [
       { $and:  [ {start_t :  { $lte: lstTime[j] }} , {end_t : { $gt: lstTime[j] }} ] } ,
-   //   { $and:  [ {start_t :  { $lt: endTime }} , {end_t : { $gte: endTime }} ] }
+     // { $and:  [ {start_t :  { $lt: endTime }} , {end_t : { $gte: endTime }} ] }
       ] ,      
       day : argDate ,room : argRoom}).fetch()[0];    
   
- if ( typeof(rec) != "undefined"  )
+      rec2=col.find({ 
+      $or : [
+   //   { $and:  [ {start_t :  { $lte: lstTime[j] }} , {end_t : { $gt: lstTime[j] }} ] } ,
+      { $and:  [ {start_t :  { $lt: endTime }} , {end_t : { $gte: endTime }} ] } ,
+      ] ,      
+      day : argDate ,room : argRoom}).fetch()[0];     
+  
+ if (( typeof(rec1) != "undefined"  ) ||  ( typeof(rec2) != "undefined"  )  )
  {   
-   OfficeFreeTime.insert( { start_t: lstTime[j] , color: 'red' , bckcolor: 'red' ,  isDisabled : true  }); 
+ 
+    if ( typeof(rec1) == "undefined"  ) 
+     {OfficeFreeTime.insert( { start_t: lstTime[j] , color: 'red' , bckcolor: 'red' ,  isDisabled : true  }); } 
+    else    { OfficeFreeTime.insert( { start_t: lstTime[j] , color: 'yellow' , bckcolor: 'yellow' ,  isDisabled : true  }); }
+   
    }
    else 
    {    OfficeFreeTime.insert( { start_t: lstTime[j] , color: 'green' , isDisabled : false  });  }
