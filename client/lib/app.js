@@ -1,7 +1,6 @@
 angular.module('table',[
   'angular-meteor',
   'ui.router',
-  'angularUtils.directives.dirPagination',
   'ngMaterial'
 ])
 

@@ -99,7 +99,7 @@ cursor.forEach(function(doc){
  if (( typeof(rec1) != "undefined"  ) ||  ( typeof(rec2) != "undefined"  )  )
  {   
  
-    if ( typeof(rec1) == "undefined"  ) 
+    if ( typeof(rec1) != "undefined"  ) 
      {OfficeFreeTime.insert( { start_t: lstTime[j] , color: 'red' , bckcolor: 'red' ,  isDisabled : true  }); } 
     else    { OfficeFreeTime.insert( { start_t: lstTime[j] , color: 'yellow' , bckcolor: 'yellow' ,  isDisabled : true  }); }
    
