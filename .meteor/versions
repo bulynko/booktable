@@ -2,6 +2,7 @@ accounts-base@1.2.0
 accounts-password@1.1.1
 accounts-ui@1.1.5
 accounts-ui-unstyled@1.1.7
+angular@1.0.2
 angular:angular@1.4.5
 angular:angular-animate@1.4.5
 angular:angular-aria@1.4.5
@@ -62,7 +63,7 @@ tmeasday:publish-counts@0.7.1
 tracker@1.0.7
 ui@1.0.6
 underscore@1.0.3
-urigo:angular@0.9.3
+urigo:angular@1.0.2
 url@1.0.4
 webapp@1.2.0
 webapp-hashing@1.0.3
