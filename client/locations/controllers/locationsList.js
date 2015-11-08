@@ -8,7 +8,7 @@ angular.module("table").controller("LocationsListCtrl", ['$scope', '$meteor', '$
     $rootScope.reservationInprogress=false;     
     $scope.timeMeeting="60";
     $scope.startTimeMeeting="10:00";
-    $scope.placeMeeting="GBM-HO"
+    $scope.placeMeeting="GMM-HO"
     $rootScope.reservationInprogress=false;
     
     $scope.users = $meteor.collection(Meteor.users, false).subscribe('users');

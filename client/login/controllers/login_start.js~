@@ -39,7 +39,7 @@ console.log(" Login-Controller..... ");
   var p2 = myuser.password2;
   var c = myuser.code;  
     
-  if ((c === "GBM" ) && ( p === p2 )  && ( p.length > 5) )
+  if ((c === "GMM" ) && ( p === p2 )  && ( p.length > 5) )
   {
      console.log(" code accepted ! "+c);
       Accounts.createUser({email: u, password: p} );  
@@ -47,7 +47,7 @@ console.log(" Login-Controller..... ");
   }  
   else {
   
-   if (c != "GBM" )  { $scope.myuser.code="";} 		
+   if (c != "GMM" )  { $scope.myuser.code="";} 		
    
     if ( p != p2 )
     {

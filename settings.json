@@ -1,0 +1,20 @@
+{
+    "public": {
+        "APP_VERSION": "0.1)",
+        "APP_ID": "3s232k3bk242k3jb4",
+        "APP_NAME": "bookshenu",
+        "PRODUCTION": true,
+        "PRODUCTION_MAIN_SERVER": "http://booking.badmintondubai.com:3000",
+        "DEVELOPMENT_MAIN_SERVER": "http://booking.badmintondubai.com:3001"
+    },
+
+    "PRODUCTION_MONGO_SERVER": "mongodb://booking.badmintondubai.com:3001/meteor",
+    "BLOB_MONGO_SERVER": null,
+
+    "DEVELOPMENT_MONGO_SERVER": "mongodb://localhost:3003/meteor/",
+
+    "DEBUG_MODE": "yes",
+
+    "MOCHA": "no",
+    "CUCUMBER": "no"
+}
